@@ -1,0 +1,48 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: will-y-poi-map-app-dev
+  annotations:
+    argocd/app-name: will-y-poi-map-app-dev
+    backstage.io/kubernetes-id: will-y-poi-map-app
+    backstage.io/kubernetes-namespace: will-y
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: rhdh-deploy/will-y-frontend
+    janus-idp.io/tekton-enabled: 'true'
+  tags:
+    - typescript
+    - angular
+    - workshop
+  links:
+    - url: https://console-openshift-console.apps.a1jxqhzp.eastus2.aroapp.io/dev-pipelines/ns/will-y/
+      title: Pipelines
+      icon: web
+    - url: https://console-openshift-console.apps.a1jxqhzp.eastus2.aroapp.io/k8s/ns/will-y/deployments/will-y-poi-map-app
+      title: Deployment
+      icon: web
+    - url: https://devspaces.apps.a1jxqhzp.eastus2.aroapp.io/#https://github.com/rhdh-deploy/will-y-frontend?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
+      title: OpenShift Dev Spaces (VS Code)
+      icon: web
+    - url: http://will-y-poi-map-app-will-y.apps.a1jxqhzp.eastus2.aroapp.io
+      title: Map
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: "user:default/will-y"
+  system: workshop-system-will-y
+  consumesApis:
+    - gateway-api-will-y
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: workshop-system-will-y
+  tags:
+    - backstage
+    - janus-idp
+    - openshift
+    - workshop
+    - rh-summit
+spec:
+  owner: "user:default/will-y"
